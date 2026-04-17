@@ -166,9 +166,11 @@ export default function App() {
             <UsageChart history={history} />
           </div>
           {quota && quota.plan === 'FREE' && (
-            <button className="upgrade-sidebar-btn" onClick={() => setShowUpgrade(true)}>
-              Actualizar a PRO
-            </button>
+            <div className="sidebar-section">
+              <button className="upgrade-sidebar-btn" onClick={() => setShowUpgrade(true)}>
+                Actualizar a PRO
+              </button>
+            </div>
           )}
         </aside>
 

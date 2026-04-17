@@ -1,3 +1,15 @@
+/* CSS Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Login Styles */
 .login-container {
   min-height: 100vh;
@@ -155,10 +167,11 @@
 
 /* App Container */
 .app-container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
+  overflow: hidden;
 }
 
 /* Header */
@@ -169,9 +182,8 @@
   padding: 12px 24px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  height: 57px;
+  flex-shrink: 0;
 }
 
 .header-left .logo {
@@ -245,26 +257,23 @@
   flex: 1;
   display: flex;
   overflow: hidden;
-  height: calc(100vh - 57px);
-  position: relative;
 }
 
-/* Sidebar */
+/* Sidebar - Fixed height */
 .sidebar {
   width: 300px;
   background: var(--bg-secondary);
   border-right: 1px solid var(--border);
   padding: 20px;
-  overflow-y: auto;
   flex-shrink: 0;
-  position: sticky;
-  top: 57px;
-  height: calc(100vh - 57px);
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
 }
 
 .sidebar-section {
-  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .upgrade-sidebar-btn {
@@ -285,14 +294,13 @@
   box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
 }
 
-/* Main Content */
+/* Main Content - Chat area */
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
-  height: 100%;
 }
 
 /* Responsive */
@@ -457,6 +465,7 @@
   padding: 16px 20px;
   background: var(--bg-secondary);
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .token-estimate {

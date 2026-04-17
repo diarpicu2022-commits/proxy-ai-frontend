@@ -19,7 +19,7 @@ export default function UsageChart({ history }) {
         <Icons.Chart />
         <span>Uso diario (7 días)</span>
       </div>
-      <ResponsiveContainer width="100%" height={140}>
+      <ResponsiveContainer width="100%" height={100}>
         <BarChart data={history} margin={{ top: 0, right: 0, bottom: 0, left: -20 }}>
           <XAxis 
             dataKey="date" 

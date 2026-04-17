@@ -25,14 +25,15 @@ body {
   font-family: 'Fira Sans', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
