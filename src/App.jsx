@@ -51,7 +51,7 @@ export default function App() {
           padding: '48px 40px', width: '360px', textAlign: 'center',
         }}>
           <div style={{ fontSize: '48px', marginBottom: '16px' }}>🤖</div>
-          <h1 style={{ color: '#e5e7eb', marginBottom: '8px', fontSize: '22px' }}>AI Platform</h1>
+          <h1 style={{ color: '#e5e7eb', marginBottom: '8px', fontSize: '22px' }}>ThoughtFlow</h1>
           <p style={{ color: '#6b7280', marginBottom: '28px', fontSize: '14px' }}>
             Patrón Proxy · Rate Limiting · Cuotas por Plan
           </p>
@@ -95,7 +95,7 @@ export default function App() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '20px' }}>🤖</span>
-          <span style={{ color: '#e5e7eb', fontWeight: '700', fontSize: '16px' }}>AI Platform</span>
+          <span style={{ color: '#e5e7eb', fontWeight: '700', fontSize: '16px' }}>ThoughtFlow</span>
           <span style={{ color: '#4b5563', fontSize: '13px' }}>· Patrón Proxy</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

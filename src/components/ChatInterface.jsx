@@ -60,8 +60,8 @@ export default function ChatInterface({ userId, quota, onResponse, onRateLimit, 
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', minHeight: 0 }}>
         {messages.length === 0 && (
           <div style={{ textAlign: 'center', color: '#4b5563', marginTop: '60px' }}>
             <div style={{ fontSize: '40px', marginBottom: '12px' }}>🤖</div>
