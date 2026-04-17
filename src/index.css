@@ -1,53 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0F172A;
+  --bg-card: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --accent: #22C55E;
+  --accent-hover: #16A34A;
+  --accent-purple: #8B5CF6;
+  --border: #334155;
+  --error: #EF4444;
+  --warning: #F59E0B;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  font-family: 'Fira Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  border: none;
-  display: block;
 }
 
-h1,
-h2 {
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 500;
-  color: #f3f4f6;
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
 }
 
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
 }
 
-p {
-  margin: 0;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
 
-code {
-  font-family: ui-monospace, Consolas, monospace;
-  display: inline-flex;
-  border-radius: 4px;
-  color: #f3f4f6;
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: #1f2028;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
 }

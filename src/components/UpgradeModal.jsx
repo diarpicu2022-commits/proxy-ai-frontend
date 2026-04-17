@@ -1,9 +1,53 @@
 import { useState } from 'react';
 import { upgradePlan } from '../api';
 
+const Icons = {
+  Close: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  ),
+  Check: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="20 6 9 17 4 12"/>
+    </svg>
+  ),
+  CreditCard: () => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+      <line x1="1" y1="10" x2="23" y2="10"/>
+    </svg>
+  ),
+  Loader: () => (
+    <svg className="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+    </svg>
+  ),
+};
+
+const PLANS = [
+  {
+    id: 'PRO',
+    name: 'Pro',
+    price: '$9.99',
+    period: '/mes',
+    features: ['500k tokens/mes', '60 requests/min', 'Soporte prioritario'],
+    popular: true,
+  },
+  {
+    id: 'ENTERPRISE',
+    name: 'Enterprise',
+    price: '$49.99',
+    period: '/mes',
+    features: ['Tokens ilimitados', 'Sin límite de requests', 'Soporte dedicado'],
+    popular: false,
+  },
+];
+
 export default function UpgradeModal({ userId, onClose, onUpgraded }) {
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState('plan'); // 'plan' | 'payment' | 'success'
+  const [step, setStep] = useState('plan');
   const [selectedPlan, setSelectedPlan] = useState('PRO');
 
   const handlePayment = async () => {
@@ -22,44 +66,48 @@ export default function UpgradeModal({ userId, onClose, onUpgraded }) {
   };
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
-    }}>
-      <div style={{
-        background: '#111827', border: '1px solid #374151', borderRadius: '12px',
-        padding: '32px', maxWidth: '440px', width: '90%',
-      }}>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>
+          <Icons.Close />
+        </button>
+
         {step === 'plan' && (
           <>
-            <h2 style={{ color: '#e5e7eb', marginBottom: '8px' }}>Actualizar Plan</h2>
-            <p style={{ color: '#6b7280', fontSize: '14px', marginBottom: '24px' }}>
-              Has agotado tu cuota mensual. Mejora tu plan para continuar.
-            </p>
-            {['PRO', 'ENTERPRISE'].map(plan => (
-              <div key={plan}
-                onClick={() => setSelectedPlan(plan)}
-                style={{
-                  border: `2px solid ${selectedPlan === plan ? '#7c3aed' : '#374151'}`,
-                  borderRadius: '8px', padding: '16px', marginBottom: '12px',
-                  cursor: 'pointer', background: selectedPlan === plan ? '#1e1033' : 'transparent',
-                }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: '#e5e7eb', fontWeight: '700' }}>{plan}</span>
-                  <span style={{ color: '#7c3aed', fontWeight: '700' }}>
-                    {plan === 'PRO' ? '$9.99/mes' : '$49.99/mes'}
-                  </span>
+            <div className="modal-header">
+              <h2>Actualizar Plan</h2>
+              <p>Elige el plan que mejor se adapte a tus necesidades</p>
+            </div>
+            <div className="plans-grid">
+              {PLANS.map(plan => (
+                <div 
+                  key={plan.id}
+                  className={`plan-card ${selectedPlan === plan.id ? 'selected' : ''} ${plan.popular ? 'popular' : ''}`}
+                  onClick={() => setSelectedPlan(plan.id)}
+                >
+                  {plan.popular && <span className="plan-badge-tag">Más popular</span>}
+                  <h3>{plan.name}</h3>
+                  <div className="plan-price">
+                    <span className="price">{plan.price}</span>
+                    <span className="period">{plan.period}</span>
+                  </div>
+                  <ul className="plan-features">
+                    {plan.features.map((f, i) => (
+                      <li key={i}>
+                        <Icons.Check />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="plan-select">
+                    <div className="radio-dot" />
+                  </div>
                 </div>
-                <div style={{ color: '#9ca3af', fontSize: '13px', marginTop: '4px' }}>
-                  {plan === 'PRO' ? '500k tokens/mes · 60 req/min' : 'Tokens ilimitados · Sin límite de requests'}
-                </div>
-              </div>
-            ))}
-            <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
-              <button onClick={onClose} style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid #374151', background: 'transparent', color: '#9ca3af', cursor: 'pointer' }}>
-                Cancelar
-              </button>
-              <button onClick={() => setStep('payment')} style={{ flex: 2, padding: '10px', borderRadius: '8px', border: 'none', background: '#7c3aed', color: '#fff', fontWeight: '700', cursor: 'pointer' }}>
+              ))}
+            </div>
+            <div className="modal-actions">
+              <button className="btn-cancel" onClick={onClose}>Cancelar</button>
+              <button className="btn-continue" onClick={() => setStep('payment')}>
                 Continuar
               </button>
             </div>
@@ -68,24 +116,40 @@ export default function UpgradeModal({ userId, onClose, onUpgraded }) {
 
         {step === 'payment' && (
           <>
-            <h2 style={{ color: '#e5e7eb', marginBottom: '8px' }}>Simulación de Pago</h2>
-            <p style={{ color: '#6b7280', fontSize: '14px', marginBottom: '20px' }}>Plan {selectedPlan} — {selectedPlan === 'PRO' ? '$9.99/mes' : '$49.99/mes'}</p>
-            <input placeholder="Número de tarjeta" disabled style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #374151', background: '#1f2937', color: '#6b7280', marginBottom: '10px', boxSizing: 'border-box' }} defaultValue="**** **** **** 4242" />
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-              <input placeholder="MM/AA" disabled style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid #374151', background: '#1f2937', color: '#6b7280', boxSizing: 'border-box' }} defaultValue="12/28" />
-              <input placeholder="CVV" disabled style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid #374151', background: '#1f2937', color: '#6b7280', boxSizing: 'border-box' }} defaultValue="***" />
+            <div className="modal-header">
+              <h2>Payment</h2>
+              <p>Plan {selectedPlan} - {PLANS.find(p => p.id === selectedPlan)?.price}/mes</p>
             </div>
-            <button onClick={handlePayment} disabled={loading} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: 'none', background: loading ? '#4b5563' : '#22c55e', color: '#fff', fontWeight: '700', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '15px' }}>
-              {loading ? 'Procesando...' : `Pagar y activar ${selectedPlan}`}
-            </button>
+            <div className="payment-form">
+              <div className="input-group">
+                <Icons.CreditCard />
+                <input type="text" placeholder="Número de tarjeta" defaultValue="4242 4242 4242 4242" disabled />
+              </div>
+              <div className="payment-row">
+                <div className="input-group">
+                  <input type="text" placeholder="MM/AA" defaultValue="12/28" disabled />
+                </div>
+                <div className="input-group">
+                  <input type="text" placeholder="CVV" defaultValue="123" disabled />
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="btn-cancel" onClick={() => setStep('plan')}>Atrás</button>
+              <button className="btn-pay" onClick={handlePayment} disabled={loading}>
+                {loading ? <><Icons.Loader /> Procesando...</> : `Pagar y activar ${selectedPlan}`}
+              </button>
+            </div>
           </>
         )}
 
         {step === 'success' && (
-          <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-            <h2 style={{ color: '#22c55e' }}>Plan {selectedPlan} activado</h2>
-            <p style={{ color: '#9ca3af' }}>Ya puedes continuar usando la plataforma.</p>
+          <div className="success-state">
+            <div className="success-icon">
+              <Icons.Check />
+            </div>
+            <h2>¡Plan activated!</h2>
+            <p>Ahora tienes acceso a {selectedPlan}</p>
           </div>
         )}
       </div>

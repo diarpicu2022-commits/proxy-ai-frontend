@@ -1,22 +1,28 @@
 const COLORS = {
-  FREE: { bg: '#6b7280', text: '#fff' },
-  PRO: { bg: '#7c3aed', text: '#fff' },
-  ENTERPRISE: { bg: '#d97706', text: '#fff' },
+  FREE: { bg: '#475569', text: '#F8FAFC' },
+  PRO: { bg: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)', text: '#F8FAFC' },
+  ENTERPRISE: { bg: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)', text: '#F8FAFC' },
+};
+
+const PLAN_LABELS = {
+  FREE: 'Free',
+  PRO: 'Pro',
+  ENTERPRISE: 'Enterprise',
 };
 
 export default function PlanBadge({ plan }) {
   const color = COLORS[plan] || COLORS.FREE;
+  const label = PLAN_LABELS[plan] || plan;
+  
   return (
-    <span style={{
-      background: color.bg,
-      color: color.text,
-      padding: '4px 12px',
-      borderRadius: '999px',
-      fontSize: '12px',
-      fontWeight: '700',
-      letterSpacing: '1px',
-    }}>
-      {plan}
+    <span 
+      className="plan-badge"
+      style={{ 
+        background: color.bg,
+        color: color.text,
+      }}
+    >
+      {label}
     </span>
   );
 }
