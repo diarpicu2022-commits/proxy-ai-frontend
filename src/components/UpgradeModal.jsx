@@ -126,10 +126,10 @@ export default function UpgradeModal({ userId, onClose, onUpgraded }) {
                 <input type="text" placeholder="Número de tarjeta" defaultValue="4242 4242 4242 4242" disabled />
               </div>
               <div className="payment-row">
-                <div className="input-group">
+                <div className="input-group compact">
                   <input type="text" placeholder="MM/AA" defaultValue="12/28" disabled />
                 </div>
-                <div className="input-group">
+                <div className="input-group compact">
                   <input type="text" placeholder="CVV" defaultValue="123" disabled />
                 </div>
               </div>

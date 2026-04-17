@@ -92,6 +92,16 @@
   color: var(--text-muted);
 }
 
+.input-group.compact {
+  padding: 0 12px;
+}
+
+.input-group.compact input {
+  padding: 12px 8px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .login-btn {
   width: 100%;
   display: flex;
@@ -236,6 +246,7 @@
   display: flex;
   overflow: hidden;
   height: calc(100vh - 57px);
+  position: relative;
 }
 
 /* Sidebar */
@@ -246,6 +257,10 @@
   padding: 20px;
   overflow-y: auto;
   flex-shrink: 0;
+  position: sticky;
+  top: 57px;
+  height: calc(100vh - 57px);
+  align-self: flex-start;
 }
 
 .sidebar-section {
@@ -277,6 +292,7 @@
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
+  height: 100%;
 }
 
 /* Responsive */
@@ -301,20 +317,22 @@
 .chat-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: 0;
 }
 
 .chat-empty {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: var(--text-muted);
+  padding: 40px 20px;
 }
 
 .empty-icon {
