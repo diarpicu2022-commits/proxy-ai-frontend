@@ -64,7 +64,7 @@ export default function ChatInterface({ userId, quota, onResponse, onRateLimit, 
       <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', minHeight: 0 }}>
         {messages.length === 0 && (
           <div style={{ textAlign: 'center', color: '#4b5563', marginTop: '60px' }}>
-            <div style={{ fontSize: '40px', marginBottom: '12px' }}>🤖</div>
+            <div style={{ fontSize: '40px', marginBottom: '12px' }}>💭</div>
             <p>Envía un mensaje para comenzar</p>
           </div>
         )}
@@ -82,7 +82,7 @@ export default function ChatInterface({ userId, quota, onResponse, onRateLimit, 
               {msg.text}
               {msg.role === 'ai' && (
                 <div style={{ marginTop: '6px', fontSize: '11px', color: '#6b7280' }}>
-                  {msg.tokens} tokens · {msg.time}ms
+                  {msg.time === 0 ? '⚡ cached' : `${msg.tokens} tokens · ${msg.time}ms`}
                 </div>
               )}
             </div>

@@ -50,11 +50,8 @@ export default function App() {
           background: '#111827', border: '1px solid #1f2937', borderRadius: '16px',
           padding: '48px 40px', width: '360px', textAlign: 'center',
         }}>
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🤖</div>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>💭</div>
           <h1 style={{ color: '#e5e7eb', marginBottom: '8px', fontSize: '22px' }}>ThoughtFlow</h1>
-          <p style={{ color: '#6b7280', marginBottom: '28px', fontSize: '14px' }}>
-            Patrón Proxy · Rate Limiting · Cuotas por Plan
-          </p>
           <input
             value={loginInput}
             onChange={e => setLoginInput(e.target.value)}
@@ -94,9 +91,8 @@ export default function App() {
         padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '20px' }}>🤖</span>
+          <span style={{ fontSize: '20px' }}>💭</span>
           <span style={{ color: '#e5e7eb', fontWeight: '700', fontSize: '16px' }}>ThoughtFlow</span>
-          <span style={{ color: '#4b5563', fontSize: '13px' }}>· Patrón Proxy</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ color: '#6b7280', fontSize: '13px' }}>@{userId}</span>
@@ -143,7 +139,7 @@ export default function App() {
           )}
         </aside>
 
-        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minHeight: 0 }}>
           <ChatInterface
             userId={userId}
             quota={quota}
